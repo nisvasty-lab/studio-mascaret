@@ -1,0 +1,279 @@
+<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Néroli — Institut de beauté & bien-être · Rouen</title>
+<style>
+  :root{
+    --cream:#faf6f1; --paper:#fffdfb; --ink:#2c2824; --muted:#7c736a;
+    --sage:#8a9a7b; --sage-d:#59684c; --rose:#c98b73; --rose-d:#ad6c55;
+    --line:#ece3d9; --gold:#c0a06a;
+  }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:"Avenir Next","Segoe UI",system-ui,-apple-system,sans-serif;color:var(--ink);background:var(--cream);line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+  h1,h2,h3,.serif{font-family:"Cochin","Baskerville","Playfair Display",Georgia,serif;font-weight:500;}
+  img{display:block;max-width:100%;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;}
+  a{color:inherit;text-decoration:none;}
+  .btn{display:inline-block;border-radius:999px;padding:14px 28px;font-size:15px;font-weight:600;transition:.2s;cursor:pointer;border:0;}
+  .btn-rose{background:var(--rose);color:#fff;box-shadow:0 8px 24px rgba(173,108,85,.3);} .btn-rose:hover{background:var(--rose-d);transform:translateY(-2px);}
+  .btn-ghost{border:1.5px solid #fff;color:#fff;} .btn-ghost:hover{background:#fff;color:var(--ink);}
+  .btn-dark{border:1.5px solid var(--sage-d);color:var(--sage-d);} .btn-dark:hover{background:var(--sage-d);color:#fff;}
+
+  .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+  @media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none;}}
+
+  /* ANNOUNCE */
+  .announce{background:var(--sage-d);color:#f3efe6;text-align:center;font-size:13px;letter-spacing:.04em;padding:8px 16px;}
+  .announce b{color:#fff;}
+
+  /* NAV */
+  nav{position:sticky;top:0;z-index:40;background:rgba(250,246,241,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--line);transition:.3s;}
+  nav .wrap{display:flex;align-items:center;justify-content:space-between;height:70px;}
+  .logo{font-family:"Cochin",Georgia,serif;font-size:25px;letter-spacing:.14em;color:var(--sage-d);}
+  .logo small{display:block;font-family:"Avenir Next",sans-serif;font-size:9px;letter-spacing:.32em;text-transform:uppercase;color:var(--muted);margin-top:-3px;}
+  .nav-links{display:flex;gap:30px;align-items:center;font-size:14.5px;}
+  .nav-links a.navlink{color:var(--muted);} .nav-links a.navlink:hover{color:var(--ink);}
+  @media(max-width:820px){.nav-links .navlink{display:none;}}
+
+  /* HERO */
+  .hero{position:relative;min-height:88vh;display:flex;align-items:center;color:#fff;
+    background:linear-gradient(90deg,rgba(40,34,30,.72) 0%,rgba(40,34,30,.35) 55%,rgba(40,34,30,.15) 100%),
+      url('https://images.unsplash.com/photo-1540555700478-4be289fbecef?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;}
+  .hero .eyebrow{letter-spacing:.32em;text-transform:uppercase;font-size:12px;color:#f0d9cd;font-weight:700;margin-bottom:18px;}
+  .hero h1{font-size:clamp(38px,6.5vw,66px);line-height:1.05;max-width:15ch;text-shadow:0 2px 20px rgba(0,0,0,.25);}
+  .hero p{margin:22px 0 30px;font-size:19px;max-width:44ch;color:#f4ece4;}
+  .hero .cta{display:flex;gap:14px;flex-wrap:wrap;}
+
+  /* TRUST STRIP */
+  .trust{background:var(--paper);border-bottom:1px solid var(--line);}
+  .trust .wrap{display:flex;flex-wrap:wrap;justify-content:space-around;gap:16px;padding:20px 24px;text-align:center;}
+  .trust div{font-size:14px;color:var(--muted);} .trust b{color:var(--sage-d);}
+
+  section{padding:84px 0;}
+  .sec-head{text-align:center;max-width:620px;margin:0 auto 50px;}
+  .sec-head .eyebrow{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--rose-d);font-weight:700;}
+  .sec-head h2{font-size:clamp(30px,4.4vw,44px);margin-top:10px;}
+  .sec-head p{color:var(--muted);margin-top:12px;}
+
+  /* SERVICES */
+  .services{background:var(--paper);}
+  .grid4{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));}
+  .card{background:var(--cream);border:1px solid var(--line);border-radius:20px;padding:28px 26px;transition:.25s;}
+  .card:hover{transform:translateY(-6px);box-shadow:0 20px 44px rgba(89,104,76,.14);}
+  .card .ic{width:52px;height:52px;border-radius:14px;background:#eef1e8;display:flex;align-items:center;justify-content:center;font-size:26px;}
+  .card h3{font-size:21px;margin:16px 0 6px;color:var(--sage-d);}
+  .card p{color:var(--muted);font-size:14.5px;min-height:46px;}
+  .card .price{margin-top:16px;font-weight:700;color:var(--rose-d);font-size:16px;}
+
+  /* GALLERY */
+  .gallery{background:var(--cream);}
+  .gal-grid{display:grid;gap:14px;grid-template-columns:repeat(4,1fr);grid-auto-rows:190px;}
+  .gal-grid figure{overflow:hidden;border-radius:16px;}
+  .gal-grid img{width:100%;height:100%;object-fit:cover;transition:.5s;}
+  .gal-grid figure:hover img{transform:scale(1.08);}
+  .gal-grid .big{grid-column:span 2;grid-row:span 2;}
+  @media(max-width:820px){.gal-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:150px;}.gal-grid .big{grid-column:span 2;}}
+
+  /* ABOUT */
+  .about{background:var(--paper);}
+  .about .wrap{display:grid;grid-template-columns:1fr 1fr;gap:52px;align-items:center;}
+  @media(max-width:800px){.about .wrap{grid-template-columns:1fr;}}
+  .about img{border-radius:22px;height:420px;width:100%;object-fit:cover;box-shadow:0 20px 50px rgba(89,104,76,.18);}
+  .about .eyebrow{letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--rose-d);font-weight:700;}
+  .about h2{font-size:clamp(28px,3.6vw,38px);margin:10px 0 14px;}
+  .about p{color:var(--muted);margin-bottom:12px;}
+  .values{display:flex;gap:30px;margin-top:20px;flex-wrap:wrap;}
+  .values div{font-size:13.5px;color:var(--muted);} .values b{display:block;color:var(--sage-d);font-size:26px;font-family:"Cochin",serif;}
+
+  /* AVIS */
+  .avis{background:linear-gradient(160deg,#f1e9df,#ece1d4);}
+  .quotes{display:grid;gap:24px;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));}
+  .quote{background:var(--paper);border-radius:20px;padding:26px;border:1px solid var(--line);box-shadow:0 8px 24px rgba(89,104,76,.06);}
+  .quote .stars{color:var(--gold);letter-spacing:3px;font-size:15px;}
+  .quote p{margin:12px 0;font-style:italic;color:#4a443d;}
+  .quote .who{font-weight:600;color:var(--sage-d);font-size:14px;}
+
+  /* FAQ */
+  .faq{background:var(--paper);}
+  .faq .wrap{max-width:760px;}
+  details{border:1px solid var(--line);border-radius:14px;padding:4px 20px;margin-bottom:12px;background:var(--cream);}
+  summary{cursor:pointer;font-weight:600;color:var(--ink);padding:16px 0;list-style:none;display:flex;justify-content:space-between;align-items:center;}
+  summary::-webkit-details-marker{display:none;}
+  summary::after{content:"+";color:var(--rose-d);font-size:22px;}
+  details[open] summary::after{content:"–";}
+  details p{color:var(--muted);padding:0 0 16px;}
+
+  /* FINAL CTA */
+  .finalcta{position:relative;color:#fff;text-align:center;
+    background:linear-gradient(rgba(44,40,36,.62),rgba(44,40,36,.62)),
+      url('https://images.unsplash.com/photo-1519824145371-296894a0daa9?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;}
+  .finalcta h2{color:#fff;font-size:clamp(28px,4vw,42px);}
+  .finalcta p{opacity:.92;margin:14px 0 26px;font-size:18px;}
+  .btn-cream{background:#fff;color:var(--sage-d);} .btn-cream:hover{background:#f3efe6;}
+
+  /* CONTACT */
+  .infos{background:var(--cream);}
+  .infos .wrap{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;}
+  @media(max-width:800px){.infos .wrap{grid-template-columns:1fr;}}
+  .infos h2{font-size:32px;margin-bottom:18px;}
+  .infos .line{display:flex;gap:12px;margin:12px 0;color:var(--muted);}
+  .infos .line b{color:var(--ink);min-width:96px;display:inline-block;}
+  .hours{background:var(--paper);border:1px solid var(--line);border-radius:20px;padding:26px 28px;}
+  .hours .row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px dashed var(--line);font-size:14.5px;}
+  .hours .row:last-child{border:0;} .hours .row b{color:var(--sage-d);}
+
+  footer{background:#2c2824;color:#cfc5b9;padding:44px 0;text-align:center;font-size:13.5px;}
+  footer .logo{color:#f0e7da;font-size:23px;}
+
+  /* MOBILE STICKY CTA */
+  .mcta{position:fixed;bottom:0;left:0;right:0;z-index:45;background:var(--paper);border-top:1px solid var(--line);
+    padding:10px 16px;display:none;justify-content:space-between;align-items:center;box-shadow:0 -6px 20px rgba(0,0,0,.06);}
+  .mcta b{color:var(--sage-d);font-size:14px;}
+  @media(max-width:820px){.mcta{display:flex;} body{padding-bottom:64px;}}
+
+  .demo-ribbon{position:fixed;top:0;right:0;z-index:50;background:var(--ink);color:#fff;font-size:11.5px;letter-spacing:.04em;
+    padding:7px 14px;border-bottom-left-radius:12px;opacity:.9;}
+</style></head>
+<body>
+
+<div class="announce">✨ <b>Nouvelle cliente ?</b> &nbsp;–15 % sur votre premier soin ce mois-ci</div>
+
+<nav><div class="wrap">
+  <div class="logo">Néroli<small>Beauté & bien-être</small></div>
+  <div class="nav-links">
+    <a class="navlink" href="#soins">Soins</a>
+    <a class="navlink" href="#univers">L'univers</a>
+    <a class="navlink" href="#institut">L'institut</a>
+    <a class="navlink" href="#avis">Avis</a>
+    <a class="btn btn-rose" href="#contact">Prendre RDV</a>
+  </div>
+</div></nav>
+
+<header class="hero"><div class="wrap">
+  <div>
+    <div class="eyebrow reveal">Institut à Rouen · centre-ville</div>
+    <h1 class="reveal">Votre parenthèse beauté &amp; bien-être</h1>
+    <p class="reveal">Soins du visage, massages, épilation et onglerie dans un cocon chaleureux — produits naturels, équipe aux petits soins.</p>
+    <div class="cta reveal">
+      <a class="btn btn-rose" href="#contact">Prendre rendez-vous</a>
+      <a class="btn btn-ghost" href="#soins">Découvrir les soins</a>
+    </div>
+  </div>
+</div></header>
+
+<div class="trust"><div class="wrap">
+  <div>🌿 <b>Produits naturels</b></div>
+  <div>📍 <b>Centre de Rouen</b></div>
+  <div>🗓️ <b>Sur rendez-vous</b></div>
+  <div>⭐ <b>4,9/5</b> · +500 clientes</div>
+</div></div>
+
+<section class="services" id="soins"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Nos prestations</div>
+    <h2>Des soins pensés pour vous</h2>
+    <p>Une carte simple, des tarifs clairs, zéro mauvaise surprise.</p>
+  </div>
+  <div class="grid4">
+    <div class="card reveal"><div class="ic">🌿</div><h3>Soin du visage</h3><p>Nettoyage, gommage et masque sur-mesure selon votre peau.</p><div class="price">dès 45 €</div></div>
+    <div class="card reveal"><div class="ic">💆‍♀️</div><h3>Massage relaxant</h3><p>Dos, corps complet ou crânien pour relâcher les tensions.</p><div class="price">dès 55 €</div></div>
+    <div class="card reveal"><div class="ic">✨</div><h3>Épilation</h3><p>À la cire tiède, précise et douce, visage et corps.</p><div class="price">dès 12 €</div></div>
+    <div class="card reveal"><div class="ic">💅</div><h3>Onglerie</h3><p>Manucure, vernis semi-permanent et beauté des pieds.</p><div class="price">dès 28 €</div></div>
+  </div>
+</div></section>
+
+<section class="gallery" id="univers"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">L'univers Néroli</div>
+    <h2>Un lieu où l'on prend le temps</h2>
+  </div>
+  <div class="gal-grid reveal">
+    <figure class="big"><img loading="lazy" src="https://images.unsplash.com/photo-1512290923902-8a9f81dc236c?auto=format&fit=crop&w=1000&q=80" alt="Cabine de soin"></figure>
+    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1600334089648-b0d9d3028eb2?auto=format&fit=crop&w=600&q=80" alt="Soin de la peau"></figure>
+    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?auto=format&fit=crop&w=600&q=80" alt="Produits naturels"></figure>
+    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?auto=format&fit=crop&w=600&q=80" alt="Massage"></figure>
+    <figure><img loading="lazy" src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=600&q=80" alt="Onglerie"></figure>
+  </div>
+</div></section>
+
+<section class="about" id="institut"><div class="wrap">
+  <img class="reveal" loading="lazy" src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?auto=format&fit=crop&w=900&q=80" alt="Soin du visage à l'institut">
+  <div class="reveal">
+    <div class="eyebrow">L'institut Néroli</div>
+    <h2>Un cocon au cœur de Rouen</h2>
+    <p>Depuis l'ouverture, nous prenons le temps : chaque soin est personnalisé, dans une ambiance apaisante, avec des produits choisis pour leur naturalité.</p>
+    <p>Notre promesse : ressortir détendue, rayonnante — et avec l'envie de revenir.</p>
+    <div class="values">
+      <div><b>+500</b>clientes ravies</div>
+      <div><b>4,9/5</b>sur les avis</div>
+      <div><b>8 ans</b>d'expérience</div>
+    </div>
+  </div>
+</div></section>
+
+<section class="avis" id="avis"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Elles en parlent</div>
+    <h2>Ce que disent nos clientes</h2>
+  </div>
+  <div class="quotes">
+    <div class="quote reveal"><div class="stars">★★★★★</div><p>« Un vrai moment de détente, l'accueil est adorable et ma peau n'a jamais été aussi belle. »</p><div class="who">— Camille R.</div></div>
+    <div class="quote reveal"><div class="stars">★★★★★</div><p>« Massage incroyable, cadre super apaisant. Je recommande les yeux fermés ! »</p><div class="who">— Léa M.</div></div>
+    <div class="quote reveal"><div class="stars">★★★★★</div><p>« Prise de RDV facile, ponctualité et vrai savoir-faire. Mon institut à Rouen. »</p><div class="who">— Sophie D.</div></div>
+  </div>
+</div></section>
+
+<section class="faq"><div class="wrap">
+  <div class="sec-head reveal">
+    <div class="eyebrow">Questions fréquentes</div>
+    <h2>Bon à savoir</h2>
+  </div>
+  <div class="reveal">
+    <details open><summary>Comment prendre rendez-vous ?</summary><p>En ligne en quelques clics via le bouton « Prendre RDV », ou par téléphone pendant nos horaires d'ouverture.</p></details>
+    <details><summary>Utilisez-vous des produits naturels ?</summary><p>Oui, nous sélectionnons des gammes naturelles et respectueuses de la peau pour l'ensemble de nos soins.</p></details>
+    <details><summary>Proposez-vous des cartes cadeaux ?</summary><p>Bien sûr — disponibles à l'institut et parfaites pour offrir un moment de détente.</p></details>
+    <details><summary>Où êtes-vous situés ?</summary><p>En plein centre de Rouen, 12 rue du Gros-Horloge. Transports et parkings à proximité.</p></details>
+  </div>
+</div></section>
+
+<section class="finalcta"><div class="wrap">
+  <div class="reveal">
+    <h2>Offrez-vous une pause</h2>
+    <p>Réservez votre soin en quelques clics — on s'occupe du reste.</p>
+    <a class="btn btn-cream" href="#contact">Prendre rendez-vous</a>
+  </div>
+</div></section>
+
+<section class="infos" id="contact"><div class="wrap">
+  <div class="reveal">
+    <div class="eyebrow" style="letter-spacing:.3em;text-transform:uppercase;font-size:12px;color:var(--rose-d);font-weight:700;">Infos pratiques</div>
+    <h2>Venez nous voir</h2>
+    <div class="line"><b>Adresse</b><span>12 rue du Gros-Horloge, 76000 Rouen</span></div>
+    <div class="line"><b>Téléphone</b><span>02 35 00 00 00</span></div>
+    <div class="line"><b>Email</b><span>contact@neroli-rouen.fr</span></div>
+    <div class="line"><b>RDV</b><span>en ligne ou par téléphone</span></div>
+    <a class="btn btn-dark" href="#" style="margin-top:14px;">Itinéraire</a>
+  </div>
+  <div class="hours reveal">
+    <h3 class="serif" style="color:var(--sage-d);margin-bottom:10px;font-size:21px;">Horaires</h3>
+    <div class="row"><span>Lundi</span><b>Fermé</b></div>
+    <div class="row"><span>Mardi – Vendredi</span><b>9h30 – 19h</b></div>
+    <div class="row"><span>Samedi</span><b>9h – 18h</b></div>
+    <div class="row"><span>Dimanche</span><b>Fermé</b></div>
+  </div>
+</div></section>
+
+<footer>
+  <div class="logo serif">Néroli</div>
+  <p style="margin-top:8px;">Institut de beauté &amp; bien-être · Rouen · © Néroli</p>
+</footer>
+
+<div class="mcta"><b>Un moment pour vous ?</b><a class="btn btn-rose" href="#contact" style="padding:11px 22px;">Prendre RDV</a></div>
+<div class="demo-ribbon">✦ Site exemple — Studio Mascaret</div>
+
+<script>
+  const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body></html>
